@@ -8,7 +8,7 @@
 #include <cmath>
 #include <limits>
 #include "states/game_state.h"
-
+#include <iostream>
 
 World::World(sf::RenderWindow& outputTarget, FontHolder& fonts, SoundPlayer& sounds)
     : mTarget(outputTarget)
@@ -35,9 +35,18 @@ World::World(sf::RenderWindow& outputTarget, FontHolder& fonts, SoundPlayer& sou
     loadLevel(3);
 }
 
-void World::update(sf::Time)
+void World::update(sf::Time time)
 {
-
+    //std::cout << "Time " << time.asSeconds();
+    for (Ball& b : balls)
+    {
+        b.update(time, mouseDown, mousePressed, tiles, holes);//, chargeSfx, swingSfx, holeSfx);
+    }
+    if (balls[0].getScale().x < -1 && balls[1].getScale().x < -1)
+    {
+        level++;
+        loadLevel(level);
+    }
 }
 
 void World::draw()
@@ -87,6 +96,23 @@ void World::draw()
 void World::processInput(const sf::Event &event)
 {
     mousePressed = false;
+    if(event.type == sf::Event::MouseButtonPressed)
+    {
+        if(event.mouseButton.button == sf::Mouse::Button::Left)
+        {
+            std::cout << "Mouse Pressed " << std::endl;
+            mouseDown = true;
+            mousePressed = true;
+        }
+    }
+    else if(event.type == sf::Event::MouseButtonReleased)
+    {
+        if(event.mouseButton.button == sf::Mouse::Button::Left)
+        {
+            std::cout << "Mouse Released " << std::endl;
+            mouseDown = false;
+        }
+    }
 }
 
 void World::loadTextures()

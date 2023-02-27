@@ -57,6 +57,7 @@ void Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const
     sf::Sprite sprite;
     sprite.setTexture(*tex);
     //sprite.setTextureRect(currentFrame);
+    //sprite.setOrigin(sprite.getLocalBounds().width/2, sprite.getLocalBounds().height/2);
     sprite.setPosition(pos);
     sprite.setScale(scale);
     sprite.setRotation(angle);

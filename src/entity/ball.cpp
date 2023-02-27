@@ -52,6 +52,7 @@ void Ball::setWin(bool p_win)
 
 void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::vector<Tile> tiles,std::vector<Hole> holes)//, Mix_Chunk* chargeSfx, Mix_Chunk* swingSfx, Mix_Chunk* holeSfx)
 {
+    deltaTime = sf::seconds(5.0f);
     if (win)
     {
         if (getPos().x < target.x)
@@ -112,7 +113,7 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
         velocity1D = std::sqrt(std::pow(std::abs(getVelocity().x), 2) + std::pow(std::abs(getVelocity().y), 2));
         launchedVelocity1D = velocity1D;
 
-        points.at(0).setPos(getPos().x, getPos().y + 8 - 32);
+        points.at(0).setPos(getPos().x, getPos().y);// + 8 - 32);
         points.at(0).setAngle(std::atan2(velocity.y, velocity.x)*(180/3.1415) + 90);
 
         dirX = velocity.x/std::abs(velocity.x);
