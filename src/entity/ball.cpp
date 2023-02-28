@@ -1,6 +1,7 @@
 #include "ball.h"
 #include <vector>
 #include <cmath>
+#include <iostream>
 #include <SFML/Window/Mouse.hpp>
 
 Ball::Ball(sf::Vector2f p_pos, sf::Texture* p_tex, sf::Texture* p_pointTex, sf::Texture* p_powerMTexFG, sf::Texture* p_powerMTexBG, int p_index)
@@ -72,6 +73,7 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
             setPos(getPos().x, getPos().y -= 0.1*deltaTime.asSeconds());
         }
         setScale(getScale().x - 0.001*deltaTime.asSeconds(), getScale().y - 0.001*deltaTime.asSeconds());
+        //std::cout << "Scale: x " << getScale().x << " y " << getScale().y << std::endl;
         return;
     }
 
@@ -113,8 +115,9 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
         velocity1D = std::sqrt(std::pow(std::abs(getVelocity().x), 2) + std::pow(std::abs(getVelocity().y), 2));
         launchedVelocity1D = velocity1D;
 
-        points.at(0).setPos(getPos().x, getPos().y);// + 8 - 32);
+        points.at(0).setPos(getPos().x, getPos().y + 8 );// + 8 - 32);
         points.at(0).setAngle(std::atan2(velocity.y, velocity.x)*(180/3.1415) + 90);
+        std::cout << "Atan2 " << std::atan2(velocity.y, velocity.x) << std::endl;
 
         dirX = velocity.x/std::abs(velocity.x);
         dirY = velocity.y/std::abs(velocity.y);

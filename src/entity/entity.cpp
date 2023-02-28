@@ -39,6 +39,8 @@ void Entity::setAngle(float p_angle)
 void Entity::setTex(sf::Texture *_tex)
 {
     tex = _tex;
+    sf::Vector2u size = tex->getSize();
+    currentFrame = sf::IntRect(0,0, size.x, size.y);
 }
 
 void Entity::setScale(float w, float h)

@@ -87,7 +87,9 @@ void World::draw()
             mTarget.draw(e);
         }
         //window.render(b.getPowerBar().at(0).getPos().x, b.getPowerBar().at(0).getPos().y, powerMeterTexture_overlay);
-
+        sf::Sprite powermeterOverlaySprite;
+        powermeterOverlaySprite.setPosition(b.getPowerBar().at(0).getPos().x, b.getPowerBar().at(0).getPos().y);
+        mTarget.draw(powermeterOverlaySprite);
     }
 
     mTarget.display();
