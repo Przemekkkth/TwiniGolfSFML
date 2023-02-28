@@ -6,6 +6,7 @@ class Hole : public Entity
 {
 public:
     Hole(sf::Vector2f p_pos, sf::Texture* p_tex);
+    virtual ~Hole(){}
 };
 
 #endif // HOLE_H

@@ -12,6 +12,7 @@ public:
          sf::Texture* p_powerMTexFG,
          sf::Texture* p_powerMTexBG, int p_index);
     Ball();
+    virtual ~Ball(){}
     void init(sf::Vector2f p_pos, sf::Texture* p_tex,
               sf::Texture* p_pointTex,
               sf::Texture* p_powerMTexFG,
@@ -45,7 +46,7 @@ public:
     void setInitialMousePos(float x, float y);
     void setVelocity(float x, float y);
     void setLaunchedVelocity(float x, float y);
-    void update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::vector<Tile> tiles, std::vector<Hole> holes);//,Mix_Chunk* chargeSfx, Mix_Chunk* swingSfx, Mix_Chunk* holeSfx);
+    void update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::vector<Tile *> tiles, std::vector<Hole *> holes);//,Mix_Chunk* chargeSfx, Mix_Chunk* swingSfx, Mix_Chunk* holeSfx);
 private:
     sf::Vector2f velocity;
     sf::Vector2f target;

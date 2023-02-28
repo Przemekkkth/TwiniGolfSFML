@@ -9,6 +9,7 @@ Ball::Ball(sf::Vector2f p_pos, sf::Texture* p_tex, sf::Texture* p_pointTex, sf::
 {
     index = p_index;
     points.push_back(Entity(sf::Vector2f(-64, -64), p_pointTex));
+    points[0].setOrigin(8,0);
     powerBar.push_back(Entity(sf::Vector2f(-64, -64), p_powerMTexBG));
     powerBar.push_back(Entity(sf::Vector2f(-64, -64), p_powerMTexFG));
 }
@@ -51,7 +52,7 @@ void Ball::setWin(bool p_win)
     win = p_win;
 }
 
-void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::vector<Tile> tiles,std::vector<Hole> holes)//, Mix_Chunk* chargeSfx, Mix_Chunk* swingSfx, Mix_Chunk* holeSfx)
+void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::vector<Tile*> tiles,std::vector<Hole*> holes)//, Mix_Chunk* chargeSfx, Mix_Chunk* swingSfx, Mix_Chunk* holeSfx)
 {
     deltaTime = sf::seconds(5.0f);
     if (win)
@@ -85,14 +86,14 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
         return;
     }
 
-    for (Hole h : holes)
+    for (Hole* h : holes)
     {
-        if (getPos().x + 4 > h.getPos().x && getPos().x + 16 < h.getPos().x + 20 && getPos().y + 4 > h.getPos().y && getPos().y + 16 < h.getPos().y + 20)
+        if (getPos().x + 4 > h->getPos().x && getPos().x + 16 < h->getPos().x + 20 && getPos().y + 4 > h->getPos().y && getPos().y + 16 < h->getPos().y + 20)
         {
             //Mix_PlayChannel(-1, holeSfx, 0);
             setWin(true);
-            target.x = h.getPos().x ;
-            target.y = h.getPos().y + 3;
+            target.x = h->getPos().x ;
+            target.y = h->getPos().y + 3;
         }
     }
 
@@ -123,7 +124,7 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
         velocity1D = std::sqrt(std::pow(std::abs(getVelocity().x), 2) + std::pow(std::abs(getVelocity().y), 2));
         launchedVelocity1D = velocity1D;
 
-        points.at(0).setPos(getPos().x, getPos().y + 8 );// + 8 - 32);
+        points.at(0).setPos(getPos().x + 8, getPos().y + 8 );// + 8 - 32);
         points.at(0).setAngle(std::atan2(velocity.y, velocity.x)*(180/3.1415) + 90);
         //std::cout << "Atan2 " << std::atan2(velocity.y, velocity.x) << std::endl;
 
@@ -206,11 +207,11 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
             dirY = 1;
         }
 
-        for (Tile& t : tiles)
+        for (Tile* t : tiles)
         {
             float newX = getPos().x + getVelocity().x*deltaTime.asSeconds();
             float newY = getPos().y;
-            if (newX + 16 > t.getPos().x && newX < t.getPos().x + t.getCurrentFrame().width && newY + 16 > t.getPos().y && newY < t.getPos().y + t.getCurrentFrame().height - 3)
+            if (newX + 16 > t->getPos().x && newX < t->getPos().x + t->getCurrentFrame().width && newY + 16 > t->getPos().y && newY < t->getPos().y + t->getCurrentFrame().height - 3)
             {
                 setVelocity(getVelocity().x*-1, getVelocity().y);
                 dirX *= -1;
@@ -218,7 +219,7 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
 
             newX = getPos().x;
             newY = getPos().y + getVelocity().y*deltaTime.asSeconds();
-            if (newX + 16 > t.getPos().x && newX < t.getPos().x + t.getCurrentFrame().width && newY + 16 > t.getPos().y && newY < t.getPos().y + t.getCurrentFrame().height - 3)
+            if (newX + 16 > t->getPos().x && newX < t->getPos().x + t->getCurrentFrame().width && newY + 16 > t->getPos().y && newY < t->getPos().y + t->getCurrentFrame().height - 3)
             {
                 setVelocity(getVelocity().x, getVelocity().y*-1);
                 dirY *= -1;

@@ -15,9 +15,29 @@ Entity::Entity()
     currentFrame = sf::IntRect(0, 0, 32, 32);
 }
 
+sf::Vector2f &Entity::getPos()
+{
+    return pos;
+}
+
+float Entity::getAngle()
+{
+    return angle;
+}
+
+sf::Vector2f Entity::getScale()
+{
+    return scale;
+}
+
 sf::Texture* Entity::getTex()
 {
     return tex;
+}
+
+sf::Vector2f Entity::getOrigin()
+{
+    return origin;
 }
 
 void Entity::update(sf::Time dt)
@@ -43,6 +63,12 @@ void Entity::setTex(sf::Texture *_tex)
     currentFrame = sf::IntRect(0,0, size.x, size.y);
 }
 
+void Entity::setOrigin(float x, float y)
+{
+    origin.x = x;
+    origin.y = y;
+}
+
 void Entity::setScale(float w, float h)
 {
     scale.x = w;
@@ -59,7 +85,7 @@ void Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const
     sf::Sprite sprite;
     sprite.setTexture(*tex);
     //sprite.setTextureRect(currentFrame);
-    //sprite.setOrigin(sprite.getLocalBounds().width/2, sprite.getLocalBounds().height/2);
+    sprite.setOrigin(origin.x, origin.y);
     sprite.setPosition(pos);
     sprite.setScale(scale);
     sprite.setRotation(angle);

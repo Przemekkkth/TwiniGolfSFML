@@ -28,7 +28,8 @@ class World : private sf::NonCopyable
 {
     public:
                                             World(sf::RenderWindow& outputTarget, FontHolder& fonts, SoundPlayer& sounds);
-        void								update(sf::Time);
+                                            ~World();
+                                            void								update(sf::Time);
         void								draw();
 
         void processInput(const sf::Event& event);
@@ -42,10 +43,10 @@ class World : private sf::NonCopyable
         FontHolder&							mFonts;
         SoundPlayer&						mSounds;
 
-        Ball balls[2];
-        std::vector<Hole> holes;
-        std::vector<Tile> tiles;
-        std::vector<Tile> loadTiles(int level);
+        Ball *balls[2];
+        std::vector<Hole*> holes;
+        std::vector<Tile*> tiles;
+        std::vector<Tile*> loadTiles(int level);
         bool gameRunning, mouseDown, mousePressed, swingPlayed, secondSwingPlayed;
         int level;
         int state;
