@@ -42,7 +42,7 @@ void World::update(sf::Time time)
     {
         b.update(time, mouseDown, mousePressed, tiles, holes);//, chargeSfx, swingSfx, holeSfx);
     }
-    if (balls[0].getScale().x < -1 && balls[1].getScale().x < -1)
+    if (balls[0].getScale().x < 0.0f && balls[1].getScale().x < 0.0f)
     {
         level++;
         loadLevel(level);

@@ -73,6 +73,14 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
             setPos(getPos().x, getPos().y -= 0.1*deltaTime.asSeconds());
         }
         setScale(getScale().x - 0.001*deltaTime.asSeconds(), getScale().y - 0.001*deltaTime.asSeconds());
+        if(getScale().x < 0.001f)
+        {
+            setScale(-0.001f, getScale().y);
+        }
+        if(getScale().y < 0.001f)
+        {
+            setScale(getScale().x, -0.001f);
+        }
         //std::cout << "Scale: x " << getScale().x << " y " << getScale().y << std::endl;
         return;
     }
@@ -117,7 +125,7 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
 
         points.at(0).setPos(getPos().x, getPos().y + 8 );// + 8 - 32);
         points.at(0).setAngle(std::atan2(velocity.y, velocity.x)*(180/3.1415) + 90);
-        std::cout << "Atan2 " << std::atan2(velocity.y, velocity.x) << std::endl;
+        //std::cout << "Atan2 " << std::atan2(velocity.y, velocity.x) << std::endl;
 
         dirX = velocity.x/std::abs(velocity.x);
         dirY = velocity.y/std::abs(velocity.y);
