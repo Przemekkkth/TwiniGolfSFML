@@ -2,8 +2,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 
-Entity::Entity(sf::Vector2f p_pos, sf::Texture* p_tex)
-:pos(p_pos), tex(p_tex)
+Entity::Entity(sf::Vector2f p_pos)
+:pos(p_pos)
 {
     currentFrame = sf::IntRect(0, 0, 32, 32);
 }
@@ -11,31 +11,30 @@ Entity::Entity(sf::Vector2f p_pos, sf::Texture* p_tex)
 Entity::Entity()
 {
     pos = sf::Vector2f(0,0);
-    tex = nullptr;
     currentFrame = sf::IntRect(0, 0, 32, 32);
 }
 
-sf::Vector2f &Entity::getPos()
+sf::Vector2f Entity::getPos() const
 {
     return pos;
 }
 
-float Entity::getAngle()
+float Entity::getAngle() const
 {
     return angle;
 }
 
-sf::Vector2f Entity::getScale()
+sf::Vector2f Entity::getScale() const
 {
     return scale;
 }
 
-sf::Texture* Entity::getTex()
+sf::Texture Entity::getTex() const
 {
     return tex;
 }
 
-sf::Vector2f Entity::getOrigin()
+sf::Vector2f Entity::getOrigin() const
 {
     return origin;
 }
@@ -56,10 +55,10 @@ void Entity::setAngle(float p_angle)
     angle = p_angle;
 }
 
-void Entity::setTex(sf::Texture *_tex)
+void Entity::setTex(sf::Texture _tex)
 {
     tex = _tex;
-    sf::Vector2u size = tex->getSize();
+    sf::Vector2u size = tex.getSize();
     currentFrame = sf::IntRect(0,0, size.x, size.y);
 }
 
@@ -83,7 +82,7 @@ sf::IntRect Entity::getCurrentFrame()
 void Entity::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     sf::Sprite sprite;
-    sprite.setTexture(*tex);
+    sprite.setTexture(tex);
     //sprite.setTextureRect(currentFrame);
     sprite.setOrigin(origin.x, origin.y);
     sprite.setPosition(pos);

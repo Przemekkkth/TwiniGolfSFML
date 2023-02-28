@@ -4,30 +4,35 @@
 #include <iostream>
 #include <SFML/Window/Mouse.hpp>
 
-Ball::Ball(sf::Vector2f p_pos, sf::Texture* p_tex, sf::Texture* p_pointTex, sf::Texture* p_powerMTexFG, sf::Texture* p_powerMTexBG, int p_index)
-: Entity(p_pos, p_tex)
+Ball::Ball(const TextureHolder &textures, const SoundPlayer &sounds, int _index)
 {
-    index = p_index;
-    points.push_back(Entity(sf::Vector2f(-64, -64), p_pointTex));
-    points[0].setOrigin(8,0);
-    powerBar.push_back(Entity(sf::Vector2f(-64, -64), p_powerMTexBG));
-    powerBar.push_back(Entity(sf::Vector2f(-64, -64), p_powerMTexFG));
+    setTex(textures.get(Textures::Ball));
+    index = _index;
+    point = new Point(textures);
+    powerBar = new PowerBar(textures);
 }
 
-Ball::Ball() : Entity()
-{
+//Ball::Ball(sf::Vector2f p_pos, sf::Texture* p_tex, sf::Texture* p_pointTex, sf::Texture* p_powerMTexFG, sf::Texture* p_powerMTexBG, int p_index)
+//: Entity(p_pos, p_tex)
+//{
+//    index = p_index;
+//    points.push_back(Entity(sf::Vector2f(-64, -64), p_pointTex));
+//    points[0].setOrigin(8,0);
+//    powerBar.push_back(Entity(sf::Vector2f(-64, -64), p_powerMTexBG));
+//    powerBar.push_back(Entity(sf::Vector2f(-64, -64), p_powerMTexFG));
+//}
 
-}
 
-void Ball::init(sf::Vector2f p_pos, sf::Texture *p_tex, sf::Texture *p_pointTex, sf::Texture *p_powerMTexFG, sf::Texture *p_powerMTexBG, int p_index)
-{
-    index = p_index;
-    points.push_back(Entity(sf::Vector2f(-64, -64), p_pointTex));
-    powerBar.push_back(Entity(sf::Vector2f(-64, -64), p_powerMTexBG));
-    powerBar.push_back(Entity(sf::Vector2f(-64, -64), p_powerMTexFG));
-    setPos(p_pos.x, p_pos.y);
-    setTex(p_tex);
-}
+
+//void Ball::init(sf::Vector2f p_pos, sf::Texture *p_tex, sf::Texture *p_pointTex, sf::Texture *p_powerMTexFG, sf::Texture *p_powerMTexBG, int p_index)
+//{
+//    index = p_index;
+//    points.push_back(Entity(sf::Vector2f(-64, -64), p_pointTex));
+//    powerBar.push_back(Entity(sf::Vector2f(-64, -64), p_powerMTexBG));
+//    powerBar.push_back(Entity(sf::Vector2f(-64, -64), p_powerMTexFG));
+//    setPos(p_pos.x, p_pos.y);
+//    setTex(p_tex);
+//}
 
 void Ball::setVelocity(float x, float y)
 {
@@ -59,19 +64,19 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
     {
         if (getPos().x < target.x)
         {
-            setPos(getPos().x += 0.1*deltaTime.asSeconds(), getPos().y);
+            setPos(getPos().x + 0.1*deltaTime.asSeconds(), getPos().y);
         }
         else if (getPos().x > target.x)
         {
-            setPos(getPos().x -= 0.1*deltaTime.asSeconds(), getPos().y);
+            setPos(getPos().x - 0.1*deltaTime.asSeconds(), getPos().y);
         }
         if (getPos().y < target.y)
         {
-            setPos(getPos().x, getPos().y += 0.1*deltaTime.asSeconds());
+            setPos(getPos().x, getPos().y + 0.1*deltaTime.asSeconds());
         }
         else if (getPos().y > target.y)
         {
-            setPos(getPos().x, getPos().y -= 0.1*deltaTime.asSeconds());
+            setPos(getPos().x, getPos().y - 0.1*deltaTime.asSeconds());
         }
         setScale(getScale().x - 0.001*deltaTime.asSeconds(), getScale().y - 0.001*deltaTime.asSeconds());
         if(getScale().x < 0.001f)
@@ -124,21 +129,23 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
         velocity1D = std::sqrt(std::pow(std::abs(getVelocity().x), 2) + std::pow(std::abs(getVelocity().y), 2));
         launchedVelocity1D = velocity1D;
 
-        points.at(0).setPos(getPos().x + 8, getPos().y + 8 );// + 8 - 32);
-        points.at(0).setAngle(std::atan2(velocity.y, velocity.x)*(180/3.1415) + 90);
+        point->setPos(getPos().x + 8, getPos().y + 8 );// + 8 - 32);
+        point->setAngle(std::atan2(velocity.y, velocity.x)*(180/3.1415) + 90);
         //std::cout << "Atan2 " << std::atan2(velocity.y, velocity.x) << std::endl;
 
         dirX = velocity.x/std::abs(velocity.x);
         dirY = velocity.y/std::abs(velocity.y);
 
-        powerBar.at(0).setPos(getPos().x + 32 + 8, getPos().y - 32);
-        powerBar.at(1).setPos(getPos().x + 32 + 8 + 4, getPos().y - 32 + 4 + 32 - 32*powerBar.at(1).getScale().y);
+        //powerBar.at(0).setPos(getPos().x + 32 + 8, getPos().y - 32);
+        //powerBar.at(1).setPos(getPos().x + 32 + 8 + 4, getPos().y - 32 + 4 + 32 - 32*powerBar.at(1).getScale().y);
+        powerBar->setPos(getPos().x + 32 +  8, getPos().y - 32);
         if (velocity1D > 1)
         {
             velocity1D = 1;
             launchedVelocity1D = 1;
         }
-        powerBar.at(1).setScale(1, velocity1D/1);
+        powerBar->setFGScale(1, velocity1D/1);
+        //powerBar.at(1).setScale(1, velocity1D/1);
     }
     else
     {
@@ -148,9 +155,9 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
             playedSwingFx = true;
             strokes++;
         }
-        points.at(0).setPos(-64, -64);
-        powerBar.at(0).setPos(-64, -64);
-        powerBar.at(1).setPos(-64, -64);
+        point->setPos(-64, -64);
+        powerBar->setPos(-64, -64);
+
         canMove = false;
         setPos(getPos().x + getVelocity().x*deltaTime.asSeconds(), getPos().y + getVelocity().y*deltaTime.asSeconds());
         if (getVelocity().x > 0.0001 || getVelocity().x < -0.0001 || getVelocity().y > 0.0001 || getVelocity().y < -0.0001)

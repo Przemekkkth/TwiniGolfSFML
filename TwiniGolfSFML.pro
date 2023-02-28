@@ -14,6 +14,8 @@ SOURCES += \
     src/entity/ball.cpp \
     src/entity/entity.cpp \
     src/entity/hole.cpp \
+    src/entity/point.cpp \
+    src/entity/power_bar.cpp \
     src/entity/tile.cpp \
     src/main.cpp \
     src/player.cpp \
@@ -39,6 +41,8 @@ HEADERS += \
     src/entity/ball.h \
     src/entity/entity.h \
     src/entity/hole.h \
+    src/entity/point.h \
+    src/entity/power_bar.h \
     src/entity/tile.h \
     src/player.h \
     src/polyomino.h \

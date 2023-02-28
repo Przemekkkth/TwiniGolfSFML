@@ -29,7 +29,7 @@ class World : private sf::NonCopyable
     public:
                                             World(sf::RenderWindow& outputTarget, FontHolder& fonts, SoundPlayer& sounds);
                                             ~World();
-                                            void								update(sf::Time);
+        void								update(sf::Time);
         void								draw();
 
         void processInput(const sf::Event& event);

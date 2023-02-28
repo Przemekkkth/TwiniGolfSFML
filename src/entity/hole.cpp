@@ -1,7 +1,9 @@
 #include "hole.h"
+#include "../utils/resource_holder.h"
 
-Hole::Hole(sf::Vector2f p_pos, sf::Texture *p_tex)
-    : Entity(p_pos, p_tex)
+Hole::Hole(const TextureHolder &textures, sf::Vector2f point)
 {
-
+    setTex(textures.get(Textures::Hole));
+    setPos(point.x, point.y);
 }
+

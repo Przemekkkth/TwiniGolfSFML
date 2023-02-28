@@ -3,10 +3,16 @@
 #include "entity.h"
 #include "hole.h"
 #include "tile.h"
+#include "../utils/resource_identifiers.h"
+#include "../SFX/sound_player.h"
+#include "point.h"
+#include "power_bar.h"
 
 class Ball : public Entity
 {
 public:
+    Ball(const TextureHolder& textures, const SoundPlayer& sounds, int _index);
+
     Ball(sf::Vector2f p_pos, sf::Texture* p_tex,
          sf::Texture* p_pointTex,
          sf::Texture* p_powerMTexFG,
@@ -26,14 +32,18 @@ public:
     {
         return initialMousePos;
     }
-    std::vector<Entity> getPoints()
+    Point* getPoint()
     {
-        return points;
+        return point;
     }
-    std::vector<Entity> getPowerBar()
+    PowerBar* getPowerBar() const
     {
         return powerBar;
     }
+//    std::vector<Entity> getPowerBar()
+//    {
+//        return powerBar;
+//    }
     int getStrokes()
     {
         return strokes;
@@ -62,8 +72,9 @@ private:
     int dirY = 1;
     bool win = false;
     float friction = 0.001;
-    std::vector<Entity> points;
-    std::vector<Entity> powerBar;
+    Point* point;
+    //std::vector<Entity> powerBar;
+    PowerBar* powerBar;
 };
 
 #endif // BALL_H
