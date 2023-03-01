@@ -37,7 +37,7 @@ void PowerBar::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 
     sf::Sprite overlaySprite;
-    overlaySprite.setTexture(tex);
+    overlaySprite.setTexture(overlayTex);
     overlaySprite.setOrigin(getOrigin());
     overlaySprite.setPosition(getPos());
     overlaySprite.setScale(getScale());
