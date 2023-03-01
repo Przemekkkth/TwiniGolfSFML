@@ -11,7 +11,7 @@ const sf::Time Application::TimePerFrame = sf::seconds(1.f/60.f);
 
 
 Application::Application()
-: mWindow(sf::VideoMode(640, 480), "Polyomino SFML", sf::Style::Close)
+: mWindow(sf::VideoMode(640, 480), "Twini-Golf SFML", sf::Style::Close)
 , mTextures()
 , mFonts()
 , mPlayer()
@@ -25,7 +25,7 @@ Application::Application()
     mFonts.load(Fonts::Main, 	"res/minecraft.ttf");
 
     mTextures.load(Textures::Buttons,		"res/buttons.png");
-    mTextures.load(Textures::PolyominoString, "res/title.png");
+    mTextures.load(Textures::PolyominoString, "res/sprite/title.png");
     mTextures.load(Textures::SFMLlogo, "res/sfml-logo-small.png");
 
     mStatisticsText.setFont(mFonts.get(Fonts::Main));

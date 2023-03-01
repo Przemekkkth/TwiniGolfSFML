@@ -153,7 +153,7 @@ void World::loadTextures()
     mTextures.load(Textures::Powermeter_FG,      "res/sprite/powermeter_fg.png");
     mTextures.load(Textures::Powermeter_BG,      "res/sprite/powermeter_bg.png");
     mTextures.load(Textures::Powermeter_Overlay, "res/sprite/powermeter_overlay.png");
-    mTextures.load(Textures::Logo,               "res/sprite/logo.png");
+    //mTextures.load(Textures::Logo,               "res/sprite/logo.png");
     mTextures.load(Textures::Click2Start,        "res/sprite/click2start.png");
     mTextures.load(Textures::End,                "res/sprite/end.png");
     mTextures.load(Textures::Splsh_BG,           "res/sprite/splashBg.png");

@@ -22,7 +22,7 @@ TitleState::TitleState(StateStack& stack, Context context)
     mText.setOrigin(mText.getLocalBounds().width/2.0f,
                     mText.getLocalBounds().height/2.0f);
 
-    mText.setPosition(context.window->getView().getSize().x / 2.f, 550.0f);
+    mText.setPosition(context.window->getView().getSize().x / 2.f, 400.0f);
 }
 
 void TitleState::draw()
