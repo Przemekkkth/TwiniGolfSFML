@@ -33,9 +33,11 @@ class World : private sf::NonCopyable
         void								draw();
 
         void processInput(const sf::Event& event);
-
+        bool isWinActivated();
     private:
         void								loadTextures();
+        void                                loadFonts();
+        void                                drawUI();
 
     private:
         sf::RenderWindow&					mTarget;
@@ -51,7 +53,8 @@ class World : private sf::NonCopyable
         int level;
         int state;
         void loadLevel(int level);
-        const char* getStrokeText();
-        const char* getLevelText(int state);
+        sf::String getStrokeText();
+        sf::String getLevelText(int side);
+
 };
 #endif // WORLD_H

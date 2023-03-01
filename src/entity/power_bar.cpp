@@ -35,6 +35,15 @@ void PowerBar::draw(sf::RenderTarget &target, sf::RenderStates states) const
     bgSprite.setRotation(getAngle());
     target.draw(bgSprite, states);
 
+
+    sf::Sprite overlaySprite;
+    overlaySprite.setTexture(tex);
+    overlaySprite.setOrigin(getOrigin());
+    overlaySprite.setPosition(getPos());
+    overlaySprite.setScale(getScale());
+    overlaySprite.setRotation(getAngle());
+    target.draw(overlaySprite, states);
+
     sf::Sprite fgSprite;
     fgSprite.setTexture(foregroundTex);
     fgSprite.setOrigin(getOrigin());
@@ -47,11 +56,5 @@ void PowerBar::draw(sf::RenderTarget &target, sf::RenderStates states) const
     fgSprite.setRotation(getAngle());
     target.draw(fgSprite, states);
 
-//    sf::Sprite overlaySprite;
-//    overlaySprite.setTexture(tex);
-//    overlaySprite.setOrigin(getOrigin());
-//    overlaySprite.setPosition(getPos());
-//    overlaySprite.setScale(getScale());
-//    overlaySprite.setRotation(getAngle());
-//    target.draw(overlaySprite, states);
+
 }

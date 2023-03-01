@@ -33,7 +33,7 @@ World::World(sf::RenderWindow& outputTarget, FontHolder& fonts, SoundPlayer& sou
     swingPlayed = false;
     secondSwingPlayed = false;
 
-    loadLevel(3);
+    loadLevel(0);
 }
 
 World::~World()
@@ -100,19 +100,8 @@ void World::draw()
     {
         mTarget.draw(*b->getPowerBar());
     }
-//    for (Ball* b : balls)
-//    {
-//        for (Entity& e : b->getPowerBar())
-//        {
-//            //window.render(e);
-//            mTarget.draw(e);
-//        }
-//        //window.render(b.getPowerBar().at(0).getPos().x, b.getPowerBar().at(0).getPos().y, powerMeterTexture_overlay);
-//        sf::Sprite powermeterOverlaySprite;
-//        powermeterOverlaySprite.setPosition(b->getPowerBar().at(0).getPos().x, b->getPowerBar().at(0).getPos().y);
-//        mTarget.draw(powermeterOverlaySprite);
-//    }
 
+    drawUI();
     mTarget.display();
 }
 
@@ -138,6 +127,15 @@ void World::processInput(const sf::Event &event)
     }
 }
 
+bool World::isWinActivated()
+{
+    if(state == 2)
+    {
+        return true;
+    }
+    return false;
+}
+
 void World::loadTextures()
 {
     std::cout << "start load Text" << std::endl;
@@ -160,6 +158,86 @@ void World::loadTextures()
     mTextures.load(Textures::End,                "res/sprite/end.png");
     mTextures.load(Textures::Splsh_BG,           "res/sprite/splashBg.png");
     std::cout << "finish load Text" << std::endl;
+}
+
+void World::loadFonts()
+{
+    //mFonts.load()
+}
+
+void World::drawUI()
+{
+    sf::Sprite levelBGLeftTex;
+    levelBGLeftTex.setTexture(mTextures.get(Textures::LevelText));
+    levelBGLeftTex.setPosition(640/4 - 132/2, 480 - 32);
+    mTarget.draw(levelBGLeftTex);
+
+    sf::Text levelTextBlack0;
+    levelTextBlack0.setFont(mFonts.get(Fonts::Main));
+    levelTextBlack0.setCharacterSize(24);
+    levelTextBlack0.setFillColor(sf::Color::Black);
+    levelTextBlack0.setString(getLevelText(0));
+    levelTextBlack0.setOrigin(levelTextBlack0.getLocalBounds().width/2.0f, levelTextBlack0.getLocalBounds().height/2.0f);
+    levelTextBlack0.setPosition(160, 467);
+    mTarget.draw(levelTextBlack0);
+
+    sf::Text levelTextWhite0;
+    levelTextWhite0.setFont(mFonts.get(Fonts::Main));
+    levelTextWhite0.setCharacterSize(24);
+    levelTextWhite0.setFillColor(sf::Color::White);
+    levelTextWhite0.setString(getLevelText(0));
+    levelTextWhite0.setOrigin(levelTextWhite0.getLocalBounds().width/2.0f, levelTextWhite0.getLocalBounds().height/2.0f);
+    levelTextWhite0.setPosition(160, 464);
+    mTarget.draw(levelTextWhite0);
+
+    sf::Sprite levelBGRightTex;
+    levelBGRightTex.setTexture(mTextures.get(Textures::LevelText));
+    levelBGRightTex.setPosition(640/2 + 640/4 - 132/2, 480 - 32);
+    mTarget.draw(levelBGRightTex);
+
+    sf::Text levelTextBlack1;
+    levelTextBlack1.setFont(mFonts.get(Fonts::Main));
+    levelTextBlack1.setCharacterSize(24);
+    levelTextBlack1.setFillColor(sf::Color::Black);
+    levelTextBlack1.setString(getLevelText(1));
+    levelTextBlack1.setOrigin(levelTextBlack1.getLocalBounds().width/2.0f, levelTextBlack1.getLocalBounds().height/2.0f);
+    levelTextBlack1.setPosition(480, 467);
+    mTarget.draw(levelTextBlack1);
+
+    sf::Text levelTextWhite1;
+    levelTextWhite1.setFont(mFonts.get(Fonts::Main));
+    levelTextWhite1.setCharacterSize(24);
+    levelTextWhite1.setFillColor(sf::Color::White);
+    levelTextWhite1.setString(getLevelText(1));
+    levelTextWhite1.setOrigin(levelTextWhite1.getLocalBounds().width/2.0f, levelTextWhite1.getLocalBounds().height/2.0f);
+    levelTextWhite1.setPosition(480, 464);
+    mTarget.draw(levelTextWhite1);
+//    window.render(640/2 + 640/4 - 132/2, 480 - 32, levelTextBgTexture);
+//    window.renderCenter(160, 240 - 16 + 3, getLevelText(1), font24, black);
+//    window.renderCenter(160, 240 - 16, getLevelText(1), font24, white);
+
+    sf::Sprite uiBGTex;
+    uiBGTex.setTexture(mTextures.get(Textures::UI_BG));
+    uiBGTex.setPosition(640/2 - 196/2, 0);
+    mTarget.draw(uiBGTex);
+
+    sf::Text strokeBlackText;
+    strokeBlackText.setFont(mFonts.get(Fonts::Main));
+    strokeBlackText.setCharacterSize(24);
+    strokeBlackText.setFillColor(sf::Color::Black);
+    strokeBlackText.setString(getStrokeText());
+    strokeBlackText.setOrigin(strokeBlackText.getLocalBounds().width/2.0f, strokeBlackText.getLocalBounds().height/2.0f);
+    strokeBlackText.setPosition(320, 16);
+    mTarget.draw(strokeBlackText);
+
+    sf::Text strokeWhiteText;
+    strokeWhiteText.setFont(mFonts.get(Fonts::Main));
+    strokeWhiteText.setCharacterSize(24);
+    strokeWhiteText.setFillColor(sf::Color::White);
+    strokeWhiteText.setString(getStrokeText());
+    strokeWhiteText.setOrigin(strokeWhiteText.getLocalBounds().width/2.0f, strokeWhiteText.getLocalBounds().height/2.0f);
+    strokeWhiteText.setPosition(320, 13);
+    mTarget.draw(strokeWhiteText);
 }
 
 std::vector<Tile *> World::loadTiles(int level)
@@ -276,5 +354,35 @@ void World::loadLevel(int level)
             holes.at(1)->setPos(24 + 32*0 + 32*10, 22 + 32*7);
         break;
     }
+}
+
+sf::String World::getStrokeText()
+{
+    int biggestStroke = 0;
+    if (balls[1]->getStrokes() > balls[0]->getStrokes())
+    {
+        biggestStroke = balls[1]->getStrokes();
+    }
+    else
+    {
+        biggestStroke = balls[0]->getStrokes();
+    }
+    std::string s = std::to_string(biggestStroke);
+    s = "STROKES: " + s;
+    sf::String retVal = sf::String(s);
+    return retVal;
+}
+
+sf::String World::getLevelText(int side)
+{
+    int tempLevel = (level + 1)*2 - 1;
+    if (side == 1)
+    {
+        tempLevel++;
+    }
+    std::string s = std::to_string(tempLevel);
+    s = "HOLE: " + s;
+    sf::String retVal = sf::String(s);
+    return retVal;
 }
 

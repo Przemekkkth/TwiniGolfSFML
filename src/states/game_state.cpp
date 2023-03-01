@@ -20,20 +20,16 @@ void GameState::draw()
 bool GameState::update(sf::Time dt)
 {
     mWorld.update(dt);
+    if(mWorld.isWinActivated())
+    {
+        requestStackPop();
+        requestStackPush(States::Win);
+    }
     return true;
 }
 
 bool GameState::handleEvent(const sf::Event& event)
 {
-
-    // Escape pressed, trigger the pause screen
-    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-    {
-        requestStackPush(States::Pause);
-        return false;
-    }
-
-
     mWorld.processInput(event);
     return true;
 }

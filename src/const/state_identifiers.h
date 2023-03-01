@@ -9,8 +9,7 @@ namespace States
         Title,
         Menu,
         Game,
-        Pause,
-        GameOver
+        Win
     };
 }
 

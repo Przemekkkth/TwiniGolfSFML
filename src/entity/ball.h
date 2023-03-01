@@ -13,17 +13,6 @@ class Ball : public Entity
 public:
     Ball(const TextureHolder& textures, const SoundPlayer& sounds, int _index);
 
-    Ball(sf::Vector2f p_pos, sf::Texture* p_tex,
-         sf::Texture* p_pointTex,
-         sf::Texture* p_powerMTexFG,
-         sf::Texture* p_powerMTexBG, int p_index);
-    Ball();
-    virtual ~Ball(){}
-    void init(sf::Vector2f p_pos, sf::Texture* p_tex,
-              sf::Texture* p_pointTex,
-              sf::Texture* p_powerMTexFG,
-              sf::Texture* p_powerMTexBG, int p_index);
-
     sf::Vector2f& getVelocity()
     {
         return velocity;
@@ -40,10 +29,7 @@ public:
     {
         return powerBar;
     }
-//    std::vector<Entity> getPowerBar()
-//    {
-//        return powerBar;
-//    }
+
     int getStrokes()
     {
         return strokes;
