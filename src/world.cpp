@@ -33,7 +33,7 @@ World::World(sf::RenderWindow& outputTarget, FontHolder& fonts, SoundPlayer& sou
     swingPlayed = false;
     secondSwingPlayed = false;
 
-    loadLevel(0);
+    loadLevel(5);
 }
 
 World::~World()
@@ -296,13 +296,64 @@ std::vector<Tile *> World::loadTiles(int level)
             temp.push_back(new Tile(mTextures, sf::Vector2f(32*8 + 32*10, 32*6), Tile::Type::Light64));
             temp.push_back(new Tile(mTextures, sf::Vector2f(32*3 + 32*10, 32*11), Tile::Type::Light64));
         break;
+    case 5:
+        //Left
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*0, 32*3), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*1, 32*3), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*2, 32*3), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*3, 32*3), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*4, 32*3), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*5, 32*3), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*6, 32*3), Tile::Type::Dark32));
+
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*3, 32*6), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*4, 32*6), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*5, 32*6), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*6, 32*6), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*7, 32*6), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*8, 32*6), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*9, 32*6), Tile::Type::Dark32));
+
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*0, 32*10), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*1, 32*10), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*2, 32*10), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*6, 32*10), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*7, 32*10), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*8, 32*10), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*9, 32*10), Tile::Type::Dark32));
+
+        //Right
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*0 + 32*10, 32*3), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*1 + 32*10, 32*3), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*2 + 32*10, 32*3), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*3 + 32*10, 32*3), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*4 + 32*10, 32*3), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*5 + 32*10, 32*3), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*6 + 32*10, 32*3), Tile::Type::Light32));
+
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*3 + 32*10, 32*6), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*4 + 32*10, 32*6), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*5 + 32*10, 32*6), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*6 + 32*10, 32*6), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*7 + 32*10, 32*6), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*8 + 32*10, 32*6), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*9 + 32*10, 32*6), Tile::Type::Light32));
+
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*0 + 32*10, 32*10), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*1 + 32*10, 32*10), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*2 + 32*10, 32*10), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*6 + 32*10, 32*10), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*7 + 32*10, 32*10), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*8 + 32*10, 32*10), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*9 + 32*10, 32*10), Tile::Type::Light32));
+        break;
     }
     return temp;
 }
 
 void World::loadLevel(int level)
 {
-    if (level > 4)
+    if (level > 5)
     {
         state = 2;
         return;
@@ -352,6 +403,14 @@ void World::loadLevel(int level)
 
             holes.at(0)->setPos(24 + 32*1, 22 + 32*1);
             holes.at(1)->setPos(24 + 32*0 + 32*10, 22 + 32*7);
+        break;
+        case 5:
+            balls[0]->setPos(24 + 32*8, 24 + 32*12);
+            holes.at(0)->setPos(24 + 32*1, 22 + 32*1);
+
+            holes.at(1)->setPos(24 + 32*8 + 32*10, 24 + 32*12);
+            balls[1]->setPos(24 + 32*0 + 32*10, 22 + 32*1);
+
         break;
     }
 }
