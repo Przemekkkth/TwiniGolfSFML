@@ -33,7 +33,7 @@ World::World(sf::RenderWindow& outputTarget, FontHolder& fonts, SoundPlayer& sou
     swingPlayed = false;
     secondSwingPlayed = false;
 
-    loadLevel(6);
+    loadLevel(8);
 }
 
 World::~World()
@@ -246,7 +246,8 @@ std::vector<Tile *> World::loadTiles(int level)
     std::vector<Tile*> temp = {};
     switch(level)
     {
-        case 0:
+    case 0:break;
+        case 1:
             temp.push_back(new Tile(mTextures, sf::Vector2f(64*3, 64*3), Tile::Type::Dark64));
             temp.push_back(new Tile(mTextures, sf::Vector2f(64*4, 64*3), Tile::Type::Dark64));
 
@@ -259,15 +260,15 @@ std::vector<Tile *> World::loadTiles(int level)
             temp.push_back(new Tile(mTextures, sf::Vector2f(64*0 + 64*5, 64*3), Tile::Type::Light64));
             temp.push_back(new Tile(mTextures, sf::Vector2f(64*1 + 64*5, 64*3), Tile::Type::Light64));
         break;
-        case 1:
+        case 2:
             temp.push_back(new Tile(mTextures, sf::Vector2f(64*2, 64*3), Tile::Type::Dark64));
 
             temp.push_back(new Tile(mTextures, sf::Vector2f(64*4 + 64*5, 64*3), Tile::Type::Light64));
         break;
-        case 2:
+        case 3:
             temp.push_back(new Tile(mTextures, sf::Vector2f(32*1 + 32*10 + 16, 32*5), Tile::Type::Light32));
         break;
-        case 3:
+        case 4:
             temp.push_back(new Tile(mTextures, sf::Vector2f(32*4, 32*7), Tile::Type::Dark64));
             temp.push_back(new Tile(mTextures, sf::Vector2f(32*3, 32*5), Tile::Type::Dark32));
             temp.push_back(new Tile(mTextures, sf::Vector2f(32*6, 32*3), Tile::Type::Dark32));
@@ -276,7 +277,7 @@ std::vector<Tile *> World::loadTiles(int level)
             temp.push_back(new Tile(mTextures, sf::Vector2f(32*3 + 32*10, 32*6), Tile::Type::Light32));
             temp.push_back(new Tile(mTextures, sf::Vector2f(32*6 + 32*10, 32*9), Tile::Type::Light32));
         break;
-        case 4:
+        case 5:
             temp.push_back(new Tile(mTextures, sf::Vector2f(32*3, 32*1), Tile::Type::Dark32));
             temp.push_back(new Tile(mTextures, sf::Vector2f(32*1, 32*3), Tile::Type::Dark32));
             temp.push_back(new Tile(mTextures, sf::Vector2f(32*5, 32*3), Tile::Type::Dark32));
@@ -296,7 +297,7 @@ std::vector<Tile *> World::loadTiles(int level)
             temp.push_back(new Tile(mTextures, sf::Vector2f(32*8 + 32*10, 32*6), Tile::Type::Light64));
             temp.push_back(new Tile(mTextures, sf::Vector2f(32*3 + 32*10, 32*11), Tile::Type::Light64));
         break;
-    case 5:
+    case 6:
         //Left
         temp.push_back(new Tile(mTextures, sf::Vector2f(32*0, 32*3), Tile::Type::Dark32));
         temp.push_back(new Tile(mTextures, sf::Vector2f(32*1, 32*3), Tile::Type::Dark32));
@@ -347,7 +348,7 @@ std::vector<Tile *> World::loadTiles(int level)
         temp.push_back(new Tile(mTextures, sf::Vector2f(32*8 + 32*10, 32*10), Tile::Type::Light32));
         temp.push_back(new Tile(mTextures, sf::Vector2f(32*9 + 32*10, 32*10), Tile::Type::Light32));
         break;
-     case 6:
+     case 7:
         //Left
         temp.push_back(new Tile(mTextures, sf::Vector2f(32*4, 32*6), Tile::Type::Dark64));
         temp.push_back(new Tile(mTextures, sf::Vector2f(32*2, 32*4), Tile::Type::Dark32));
@@ -358,13 +359,27 @@ std::vector<Tile *> World::loadTiles(int level)
         temp.push_back(new Tile(mTextures, sf::Vector2f(32*7 + 32*10, 32*9), Tile::Type::Light32));
 
         break;
+    case 8:
+        //Left
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*4, 32*4), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*3, 32*2), Tile::Type::Dark64));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*2, 32*2), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*5, 32*3), Tile::Type::Dark32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*6, 32*2), Tile::Type::Dark32));
+        //Right
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*4+32*10, 32*2), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*3+32*10, 32*4), Tile::Type::Light64));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*2+32*10, 32*4), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*5+32*10, 32*3), Tile::Type::Light32));
+        temp.push_back(new Tile(mTextures, sf::Vector2f(32*6+32*10, 32*4), Tile::Type::Light32));
+        break;
     }
     return temp;
 }
 
 void World::loadLevel(int level)
 {
-    if (level > 6)
+    if (level > 8)
     {
         state = 2;
         return;
@@ -380,56 +395,70 @@ void World::loadLevel(int level)
 
     switch (level)
     {
-        case 0:
-            balls[0]->setPos(24 + 32*4, 24 + 32*11);
-            balls[1]->setPos(24 + 32*4 + 32*10, 24 + 32*11);
+    case 0:
+        balls[0]->setPos(8 + 32*4, 8 + 32*8);
+        balls[1]->setPos(8 + 32*4 + 32*10, 8 + 32*8);
 
-            holes.at(0)->setPos(24 + 32*4, 22 + 32*2);
-            holes.at(1)->setPos(24 + 32*4 + 32*10, 22 + 32*2);
+        holes.at(0)->setPos(8 + 32*4, 8 + 32*2);
+        holes.at(1)->setPos(8 + 32*4 + 32*10, 8 + 32*2);
         break;
-        case 1:
-            balls[0]->setPos(24 + 32*4, 24 + 32*11);
-            balls[1]->setPos(24 + 32*4 + 32*10, 24 + 32*11);
+    case 1:
+        balls[0]->setPos(24 + 32*4, 24 + 32*11);
+        balls[1]->setPos(24 + 32*4 + 32*10, 24 + 32*11);
 
-            holes.at(0)->setPos(24 + 32*4, 22 + 32*2);
-            holes.at(1)->setPos(24 + 32*4 + 32*10, 22 + 32*2);
+        holes.at(0)->setPos(24 + 32*4, 22 + 32*2);
+        holes.at(1)->setPos(24 + 32*4 + 32*10, 22 + 32*2);
         break;
-        case 2:
-            balls[0]->setPos(8 + 32*7, 8 + 32*10);
-            balls[1]->setPos(8 + 32*7 + 32*10, 8 + 32*10);
+    case 2:
+        balls[0]->setPos(24 + 32*4, 24 + 32*11);
+        balls[1]->setPos(24 + 32*4 + 32*10, 24 + 32*11);
 
-            holes.at(0)->setPos(8 + 32*2, 6 + 32*5);
-            holes.at(1)->setPos(8 + 32*4 + 32*10, 6 + 32*3);
+        holes.at(0)->setPos(24 + 32*4, 22 + 32*2);
+        holes.at(1)->setPos(24 + 32*4 + 32*10, 22 + 32*2);
         break;
-        case 3:
-            balls[0]->setPos(24 + 32*4, 24 + 32*5);
-            balls[1]->setPos(24 + 32*4 + 32*10, 24 + 32*4);
+    case 3:
+        balls[0]->setPos(8 + 32*7, 8 + 32*10);
+        balls[1]->setPos(8 + 32*7 + 32*10, 8 + 32*10);
 
-            holes.at(0)->setPos(24 + 32*4, 22 + 32*1);
-            holes.at(1)->setPos(24 + 32*4 + 32*10, 22 + 32*11);
+        holes.at(0)->setPos(8 + 32*2, 6 + 32*5);
+        holes.at(1)->setPos(8 + 32*4 + 32*10, 6 + 32*3);
         break;
-        case 4:
-            balls[0]->setPos(24 + 32*2, 24 + 32*12);
-            balls[1]->setPos(24 + 32*0 + 32*10, 24 + 32*5);
+    case 4:
+        balls[0]->setPos(24 + 32*4, 24 + 32*5);
+        balls[1]->setPos(24 + 32*4 + 32*10, 24 + 32*4);
 
-            holes.at(0)->setPos(24 + 32*1, 22 + 32*1);
-            holes.at(1)->setPos(24 + 32*0 + 32*10, 22 + 32*7);
+        holes.at(0)->setPos(24 + 32*4, 22 + 32*1);
+        holes.at(1)->setPos(24 + 32*4 + 32*10, 22 + 32*11);
         break;
-        case 5:
-            balls[0]->setPos(24 + 32*8, 24 + 32*12);
-            holes.at(0)->setPos(24 + 32*1, 22 + 32*1);
+    case 5:
+        balls[0]->setPos(24 + 32*2, 24 + 32*12);
+        balls[1]->setPos(24 + 32*0 + 32*10, 24 + 32*5);
 
-            holes.at(1)->setPos(24 + 32*8 + 32*10, 24 + 32*12);
-            balls[1]->setPos(24 + 32*0 + 32*10, 22 + 32*1);
-
+        holes.at(0)->setPos(24 + 32*1, 22 + 32*1);
+        holes.at(1)->setPos(24 + 32*0 + 32*10, 22 + 32*7);
         break;
     case 6:
+        balls[0]->setPos(24 + 32*8, 24 + 32*12);
+        holes.at(0)->setPos(24 + 32*1, 22 + 32*1);
+
+        holes.at(1)->setPos(24 + 32*8 + 32*10, 24 + 32*12);
+        balls[1]->setPos(24 + 32*0 + 32*10, 22 + 32*1);
+
+        break;
+    case 7:
         balls[0]->setPos(32*2+8, 32*9+8);
         holes.at(0)->setPos(32*7+8, 32*4+8);
 
         balls[1]->setPos(32*7+8 + 32*10, 32*4+8);
         holes.at(1)->setPos(32*2+8+32*10, 32*9+8);
-    break;
+        break;
+    case 8:
+        balls[0]->setPos(32*4+8, 32*9+8);
+        holes.at(0)->setPos(32*5+8, 32*2+8);
+        //temp.push_back(new Tile(mTextures, sf::Vector2f(32*4, 32*4), Tile::Type::Dark32));
+        balls[1]->setPos(32*4+8+32*10, 32*9+8);
+        holes.at(1)->setPos(32*4+8+32*10, 32*3+8);
+        break;
     }
 }
 
