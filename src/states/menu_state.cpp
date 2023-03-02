@@ -14,7 +14,7 @@ MenuState::MenuState(StateStack& stack, Context context)
     : State(stack, context)
     , mGUIContainer()
 {
-    sf::Texture& texture = context.textures->get(Textures::PolyominoString);
+    sf::Texture& texture = context.textures->get(Textures::Title);
     mTitleStringSprite.setTexture(texture);
     mTitleStringSprite.setPosition(30, 30);
 

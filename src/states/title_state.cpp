@@ -9,7 +9,7 @@ TitleState::TitleState(StateStack& stack, Context context)
 , mShowText(true)
 , mTextEffectTime(sf::Time::Zero)
 {
-    mTitleSprite.setTexture(context.textures->get(Textures::PolyominoString));
+    mTitleSprite.setTexture(context.textures->get(Textures::Title));
     mTitleSprite.setPosition(30, 30);
 
     mSFMLlogoSprite.setTexture(context.textures->get(Textures::SFMLlogo));

@@ -14,12 +14,10 @@ namespace Textures
     enum ID
     {
         Ball, Hole, Point, Tile_Dark32, Tile_Dark64, Tile_Light32, Tile_Light64,
-        Ball_Shadow, BG, UI_BG, LevelText, Powermeter_FG, Powermeter_BG, Powermeter_Overlay,
-        Logo, Click2Start, End, Splsh_BG,
-        PolyominoString,
+        Ball_Shadow, BG,  LevelText, Powermeter_FG, Powermeter_BG, Powermeter_Overlay,
+        Title, UI_BG,
         Buttons,
-        SFMLlogo,
-        Blocks
+        SFMLlogo
     };
 }
 
@@ -35,7 +33,7 @@ namespace SoundEffect
 {
     enum ID
     {
-        FilledRow
+        Charge, Hole, Swing
     };
 }
 

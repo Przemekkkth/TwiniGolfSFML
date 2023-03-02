@@ -56,10 +56,19 @@ World::~World()
 
 void World::update(sf::Time time)
 {
-    //std::cout << "Time " << time.asSeconds();
+    if (!swingPlayed)
+    {
+        mSounds.play(SoundEffect::Swing);
+        swingPlayed = true;
+    }
+    if (!secondSwingPlayed)
+    {
+        mSounds.play(SoundEffect::Swing);
+        secondSwingPlayed = true;
+    }
     for (Ball* b : balls)
     {
-        b->update(time, mouseDown, mousePressed, tiles, holes);//, chargeSfx, swingSfx, holeSfx);
+        b->update(time, mouseDown, mousePressed, tiles, holes);
     }
     if (balls[0]->getScale().x < 0.0f && balls[1]->getScale().x < 0.0f)
     {
@@ -123,6 +132,7 @@ void World::processInput(const sf::Event &event)
         {
             std::cout << "Mouse Released " << std::endl;
             mouseDown = false;
+            mSounds.play(SoundEffect::Swing);
         }
     }
 }
@@ -138,7 +148,6 @@ bool World::isWinActivated()
 
 void World::loadTextures()
 {
-    std::cout << "start load Text" << std::endl;
     mTextures.load(Textures::Ball,               "res/sprite/ball.png");
     mTextures.load(Textures::Hole,               "res/sprite/hole.png");
     mTextures.load(Textures::Point,              "res/sprite/point.png");
@@ -153,16 +162,11 @@ void World::loadTextures()
     mTextures.load(Textures::Powermeter_FG,      "res/sprite/powermeter_fg.png");
     mTextures.load(Textures::Powermeter_BG,      "res/sprite/powermeter_bg.png");
     mTextures.load(Textures::Powermeter_Overlay, "res/sprite/powermeter_overlay.png");
-    //mTextures.load(Textures::Logo,               "res/sprite/logo.png");
-    mTextures.load(Textures::Click2Start,        "res/sprite/click2start.png");
-    mTextures.load(Textures::End,                "res/sprite/end.png");
-    mTextures.load(Textures::Splsh_BG,           "res/sprite/splashBg.png");
-    std::cout << "finish load Text" << std::endl;
 }
 
 void World::loadFonts()
 {
-    //mFonts.load()
+
 }
 
 void World::drawUI()
@@ -212,9 +216,6 @@ void World::drawUI()
     levelTextWhite1.setOrigin(levelTextWhite1.getLocalBounds().width/2.0f, levelTextWhite1.getLocalBounds().height/2.0f);
     levelTextWhite1.setPosition(480, 464);
     mTarget.draw(levelTextWhite1);
-//    window.render(640/2 + 640/4 - 132/2, 480 - 32, levelTextBgTexture);
-//    window.renderCenter(160, 240 - 16 + 3, getLevelText(1), font24, black);
-//    window.renderCenter(160, 240 - 16, getLevelText(1), font24, white);
 
     sf::Sprite uiBGTex;
     uiBGTex.setTexture(mTextures.get(Textures::UI_BG));
@@ -286,7 +287,6 @@ std::vector<Tile *> World::loadTiles(int level)
             temp.push_back(new Tile(mTextures, sf::Vector2f(32*5, 32*12), Tile::Type::Dark32));
             temp.push_back(new Tile(mTextures, sf::Vector2f(32*7, 32*10), Tile::Type::Dark32));
 
-            //temp.push_bacnew k(TilmTextures, e(Vector2f(32*4, 32*7), Tile::Type::Dark64));
             temp.push_back(new Tile(mTextures, sf::Vector2f(32*8, 32*7), Tile::Type::Dark64));
 
             temp.push_back(new Tile(mTextures, sf::Vector2f(32*2 + 32*10, 32*2), Tile::Type::Light32));

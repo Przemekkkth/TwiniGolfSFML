@@ -11,7 +11,7 @@
 class Ball : public Entity
 {
 public:
-    Ball(const TextureHolder& textures, const SoundPlayer& sounds, int _index);
+    Ball(const TextureHolder& textures, SoundPlayer &sounds, int _index);
 
     sf::Vector2f& getVelocity()
     {
@@ -59,8 +59,8 @@ private:
     bool win = false;
     float friction = 0.001;
     Point* point;
-    //std::vector<Entity> powerBar;
     PowerBar* powerBar;
+    SoundPlayer& mSound;
 };
 
 #endif // BALL_H

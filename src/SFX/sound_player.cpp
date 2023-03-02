@@ -19,7 +19,9 @@ SoundPlayer::SoundPlayer()
 : mSoundBuffers()
 , mSounds()
 {
-    mSoundBuffers.load(SoundEffect::FilledRow,    "res/filled_row.wav");
+    mSoundBuffers.load(SoundEffect::Charge,    "res/sfx/charge.ogg");
+    mSoundBuffers.load(SoundEffect::Swing,    "res/sfx/swing.ogg");
+    mSoundBuffers.load(SoundEffect::Hole,    "res/sfx/hole.ogg");
     // Listener points towards the screen (default in SFML)
     sf::Listener::setDirection(0.f, 0.f, -1.f);
 }

@@ -22,11 +22,11 @@ Application::Application()
 {
     mWindow.setKeyRepeatEnabled(false);
 
-    mFonts.load(Fonts::Main, 	"res/minecraft.ttf");
+    mFonts.load(Fonts::Main, 	"res/font/minecraft.ttf");
 
-    mTextures.load(Textures::Buttons,		"res/buttons.png");
-    mTextures.load(Textures::PolyominoString, "res/sprite/title.png");
-    mTextures.load(Textures::SFMLlogo, "res/sfml-logo-small.png");
+    mTextures.load(Textures::Buttons,		"res/sprite/buttons.png");
+    mTextures.load(Textures::Title, "res/sprite/title.png");
+    mTextures.load(Textures::SFMLlogo, "res/sprite/sfml-logo-small.png");
 
     mStatisticsText.setFont(mFonts.get(Fonts::Main));
     mStatisticsText.setPosition(5.f, 5.f);

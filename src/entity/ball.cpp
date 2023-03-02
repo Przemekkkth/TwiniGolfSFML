@@ -3,13 +3,16 @@
 #include <cmath>
 #include <iostream>
 #include <SFML/Window/Mouse.hpp>
+#include "../SFX/sound_player.h"
 
-Ball::Ball(const TextureHolder &textures, const SoundPlayer &sounds, int _index)
+Ball::Ball(const TextureHolder &textures, SoundPlayer &sounds, int _index)
+    : mSound(sounds)
 {
     setTex(textures.get(Textures::Ball));
     index = _index;
     point = new Point(textures);
     powerBar = new PowerBar(textures);
+
 }
 
 
@@ -66,7 +69,7 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
         {
             setScale(getScale().x, -0.001f);
         }
-        //std::cout << "Scale: x " << getScale().x << " y " << getScale().y << std::endl;
+
         return;
     }
 
@@ -74,7 +77,7 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
     {
         if (getPos().x + 4 > h->getPos().x && getPos().x + 16 < h->getPos().x + 20 && getPos().y + 4 > h->getPos().y && getPos().y + 16 < h->getPos().y + 20)
         {
-            //Mix_PlayChannel(-1, holeSfx, 0);
+            mSound.play(SoundEffect::Hole);
             setWin(true);
             target.x = h->getPos().x ;
             target.y = h->getPos().y + 3;
@@ -83,11 +86,10 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
 
     if (mousePressed && canMove)
     {
-        //Mix_PlayChannel(-1, chargeSfx, 0);
+        mSound.play(SoundEffect::Charge);
         playedSwingFx = false;
         int mouseX = 0;
         int mouseY = 0;
-        //SDL_GetMouseState(&mouseX, &mouseY);
         sf::Vector2i mousePos = sf::Mouse::getPosition();
         mouseX = mousePos.x;
         mouseY = mousePos.y;
@@ -99,7 +101,6 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
 
         int mouseX = 0;
         int mouseY = 0;
-        //SDL_GetMouseState(&mouseX, &mouseY);
         sf::Vector2i mousePos = sf::Mouse::getPosition();
         mouseX = mousePos.x;
         mouseY = mousePos.y;
@@ -126,7 +127,7 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
     {
         if (!playedSwingFx)
         {
-            //Mix_PlayChannel(-1, swingSfx, 0);
+            mSound.play(SoundEffect::Swing);
             playedSwingFx = true;
             strokes++;
         }
@@ -137,11 +138,6 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
         setPos(getPos().x + getVelocity().x*deltaTime.asSeconds(), getPos().y + getVelocity().y*deltaTime.asSeconds());
         if (getVelocity().x > 0.0001 || getVelocity().x < -0.0001 || getVelocity().y > 0.0001 || getVelocity().y < -0.0001)
         {
-            //float xDir = velocity.x/abs(velocity.x);
-            //float yDir = velocity.y/abs(velocity.y);
-
-            //velocity.x = (abs(velocity.x) - friction*deltaTime.asSeconds())*xDir;
-            //velocity.y = (abs(velocity.y) - friction*deltaTime.asSeconds())*yDir;
             if (velocity1D > 0)
             {
                 velocity1D -= friction*deltaTime.asSeconds();
@@ -160,7 +156,6 @@ void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::ve
             setVelocity(0,0);
             int mouseX = 0;
             int mouseY = 0;
-            //SDL_GetMouseState(&mouseX, &mouseY);
             sf::Vector2i mousePos = sf::Mouse::getPosition();
             mouseX = mousePos.x;
             mouseY = mousePos.y;
