@@ -122,7 +122,6 @@ void World::processInput(const sf::Event &event)
     {
         if(event.mouseButton.button == sf::Mouse::Button::Left)
         {
-            std::cout << "Mouse Pressed " << std::endl;
             mouseDown = true;
             mousePressed = true;
         }
@@ -131,7 +130,6 @@ void World::processInput(const sf::Event &event)
     {
         if(event.mouseButton.button == sf::Mouse::Button::Left)
         {
-            std::cout << "Mouse Released " << std::endl;
             mouseDown = false;
             mSounds.play(SoundEffect::Swing);
         }
