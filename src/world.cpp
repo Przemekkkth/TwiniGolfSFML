@@ -24,7 +24,8 @@ World::World(sf::RenderWindow& outputTarget, FontHolder& fonts, SoundPlayer& sou
     holes = { new Hole(mTextures, sf::Vector2f(0.0f, 0.0f)), new Hole(mTextures, sf::Vector2f(0.0f, 0.0f))};
 
 
-    level = 0;
+    level = GameState::choosenLevel;
+    std::cout << "level " << level << std::endl;
     tiles = loadTiles(level);
     gameRunning = true;
     mouseDown = false;
@@ -33,7 +34,7 @@ World::World(sf::RenderWindow& outputTarget, FontHolder& fonts, SoundPlayer& sou
     swingPlayed = false;
     secondSwingPlayed = false;
 
-    loadLevel(8);
+    loadLevel(level);
 }
 
 World::~World()

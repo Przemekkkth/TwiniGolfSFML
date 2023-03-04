@@ -5,6 +5,7 @@
 #include "states/title_state.h"
 #include "states/game_state.h"
 #include "states/menu_state.h"
+#include "states/level_state.h"
 #include "states/win_state.h"
 
 const sf::Time Application::TimePerFrame = sf::seconds(1.f/60.f);
@@ -94,6 +95,7 @@ void Application::registerStates()
 {
     mStateStack.registerState<TitleState>(States::Title);
     mStateStack.registerState<MenuState>(States::Menu);
+    mStateStack.registerState<LevelState>(States::Levels);
     mStateStack.registerState<GameState>(States::Game);
     mStateStack.registerState<WinState>(States::Win);
 }

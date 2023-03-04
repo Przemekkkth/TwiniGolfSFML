@@ -23,14 +23,23 @@ MenuState::MenuState(StateStack& stack, Context context)
     monominoButton->setText("Play");
     monominoButton->setCallback([this] ()
     {
-        GameState::choosenLevel = 1;
+        GameState::choosenLevel = 3;
         requestStackPop();
         requestStackPush(States::Game);
     });
 
 
+    auto levelsButton = std::make_shared<GUI::Button>(context);
+    levelsButton->setPosition(230, 275);
+    levelsButton->setText("Levels");
+    levelsButton->setCallback([this] ()
+    {
+        requestStackPop();
+        requestStackPush(States::Levels);
+    });
+
     auto exitButton = std::make_shared<GUI::Button>(context);
-    exitButton->setPosition(230, 275);
+    exitButton->setPosition(230, 350);
     exitButton->setText("Exit");
     exitButton->setCallback([this] ()
     {
@@ -40,6 +49,7 @@ MenuState::MenuState(StateStack& stack, Context context)
 
 
     mGUIContainer.pack(monominoButton);
+    mGUIContainer.pack(levelsButton);
     mGUIContainer.pack(exitButton);
 
 }

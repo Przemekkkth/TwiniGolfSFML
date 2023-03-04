@@ -1,6 +1,7 @@
 #include "title_state.h"
 #include "../utils/resource_holder.h"
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Window/Event.hpp>
 
 
 TitleState::TitleState(StateStack& stack, Context context)
@@ -50,11 +51,11 @@ bool TitleState::update(sf::Time dt)
 bool TitleState::handleEvent(const sf::Event& event)
 {
     // If any key is pressed, trigger the next screen
-    if (event.type == sf::Event::KeyPressed)
+    if (event.type == sf::Event::KeyReleased)
     {
         requestStackPop();
+
         requestStackPush(States::Menu);
     }
-
     return true;
 }

@@ -3,7 +3,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <iostream>
 
-int GameState::choosenLevel = 4;
+int GameState::choosenLevel = 0;
 GameState::GameState(StateStack& stack, Context context)
 : State(stack, context)
 , mWorld(*context.window, *context.fonts, *context.sounds)
