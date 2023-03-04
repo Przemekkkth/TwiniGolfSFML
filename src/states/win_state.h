@@ -15,6 +15,7 @@ public:
 private:
     sf::Sprite mTitleSprite;
     sf::Text   mInfoText;
+    sf::Text   mResult;
     sf::Text   mPressText;
 
     bool				mShowText;

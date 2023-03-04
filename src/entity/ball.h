@@ -58,6 +58,7 @@ private:
     int dirY = 1;
     bool win = false;
     float friction = 0.001;
+    const float speed = 5.0f;
     Point* point;
     PowerBar* powerBar;
     SoundPlayer& mSound;

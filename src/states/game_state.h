@@ -19,6 +19,7 @@ class GameState : public State
         virtual bool		handleEvent(const sf::Event& event);
 
         static int choosenLevel;
+        static sf::String score;
     private:
         World				mWorld;
         Player&				mPlayer;

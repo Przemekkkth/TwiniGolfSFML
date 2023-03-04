@@ -473,6 +473,7 @@ sf::String World::getStrokeText()
         biggestStroke = balls[0]->getStrokes();
     }
     std::string s = std::to_string(biggestStroke);
+    GameState::score = sf::String(s);
     s = "STROKES: " + s;
     sf::String retVal = sf::String(s);
     return retVal;

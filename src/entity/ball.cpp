@@ -39,28 +39,28 @@ void Ball::setWin(bool p_win)
     win = p_win;
 }
 
-void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::vector<Tile*> tiles,std::vector<Hole*> holes)//, Mix_Chunk* chargeSfx, Mix_Chunk* swingSfx, Mix_Chunk* holeSfx)
+void Ball::update(sf::Time deltaTime, bool mouseDown, bool mousePressed, std::vector<Tile*> tiles,std::vector<Hole*> holes)
 {
     deltaTime = sf::seconds(5.0f);
     if (win)
     {
         if (getPos().x < target.x)
         {
-            setPos(getPos().x + 0.1*deltaTime.asSeconds(), getPos().y);
+            setPos(getPos().x + 0.1*speed, getPos().y);
         }
         else if (getPos().x > target.x)
         {
-            setPos(getPos().x - 0.1*deltaTime.asSeconds(), getPos().y);
+            setPos(getPos().x - 0.1*speed, getPos().y);
         }
         if (getPos().y < target.y)
         {
-            setPos(getPos().x, getPos().y + 0.1*deltaTime.asSeconds());
+            setPos(getPos().x, getPos().y + 0.1*speed);
         }
         else if (getPos().y > target.y)
         {
-            setPos(getPos().x, getPos().y - 0.1*deltaTime.asSeconds());
+            setPos(getPos().x, getPos().y - 0.1*speed);
         }
-        setScale(getScale().x - 0.001*deltaTime.asSeconds(), getScale().y - 0.001*deltaTime.asSeconds());
+        setScale(getScale().x - 0.001*speed, getScale().y - 0.001*speed);
         if(getScale().x < 0.001f)
         {
             setScale(-0.001f, getScale().y);

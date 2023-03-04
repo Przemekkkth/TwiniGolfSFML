@@ -1,6 +1,7 @@
 #include "win_state.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "../utils/resource_holder.h"
+#include "game_state.h"
 
 WinState::WinState(StateStack& stack, Context context)
     : State(stack, context), mShowText(true), mTextEffectTime(sf::Time::Zero)
@@ -17,6 +18,13 @@ WinState::WinState(StateStack& stack, Context context)
                         mInfoText.getLocalBounds().height/2);
     mInfoText.setPosition(320, 240);
 
+    mResult.setFont(context.fonts->get(Fonts::Main));
+    mResult.setCharacterSize(24);
+    mResult.setFillColor(sf::Color::White);
+    mResult.setString("Result: " + GameState::score);
+    mResult.setOrigin(mResult.getLocalBounds().width/2, mResult.getLocalBounds().height/2);
+    mResult.setPosition(320, 300);
+
     mPressText.setFont(context.fonts->get(Fonts::Main));
     mPressText.setCharacterSize(24);
     mPressText.setString("Press any key to go menu");
@@ -29,6 +37,7 @@ void WinState::draw()
 {
     sf::RenderWindow* renderWindow = getContext().window;
     renderWindow->draw(mTitleSprite);
+    renderWindow->draw(mResult);
     renderWindow->draw(mInfoText);
     if (mShowText)
         renderWindow->draw(mPressText);
@@ -49,8 +58,8 @@ bool WinState::update(sf::Time dt)
 
 bool WinState::handleEvent(const sf::Event &event)
 {
-    // If any key is pressed, trigger the next screen
-    if (event.type == sf::Event::KeyPressed)
+    // If any key is released, trigger the menu screen
+    if (event.type == sf::Event::KeyReleased)
     {
         requestStackPop();
         requestStackPush(States::Menu);

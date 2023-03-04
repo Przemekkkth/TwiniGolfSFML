@@ -19,7 +19,6 @@ SOURCES += \
     src/entity/tile.cpp \
     src/main.cpp \
     src/player.cpp \
-    src/polyomino.cpp \
     src/states/game_state.cpp \
     src/states/level_state.cpp \
     src/states/menu_state.cpp \
@@ -45,7 +44,6 @@ HEADERS += \
     src/entity/power_bar.h \
     src/entity/tile.h \
     src/player.h \
-    src/polyomino.h \
     src/states/game_state.h \
     src/states/level_state.h \
     src/states/menu_state.h \
