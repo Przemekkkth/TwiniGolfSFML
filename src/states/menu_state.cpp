@@ -23,7 +23,7 @@ MenuState::MenuState(StateStack& stack, Context context)
     monominoButton->setText("Play");
     monominoButton->setCallback([this] ()
     {
-        GameState::choosenLevel = 3;
+        GameState::choosenLevel = 0;
         requestStackPop();
         requestStackPush(States::Game);
     });
