@@ -4,6 +4,35 @@ This is clone of TwiniGolf which is created in SFML.It based on this [repo](http
 ## Screenshot
 ![Image](https://user-images.githubusercontent.com/28188300/222953464-29a078e1-2df0-4ec9-b7c7-3bad2d1998c5.gif)
 
+### Installing
+A step by step series  that tell you how to get a execute project.
+
+1) Using Qt
+
+Get it from GitHub
+```
+git clone git@github.com:Przemekkkth/TwiniGolfSFML.git
+```
+Compile
+```
+qmake && make
+```
+
+2) Using CMake
+
+```
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+```
+```
+cd build/
+```
+```
+make -j4
+```
+```
+cp -r ../res/ .
+```
+You can copy res directory using other method ie by GUI. Next, you can play it.
 
 ### Control
 
