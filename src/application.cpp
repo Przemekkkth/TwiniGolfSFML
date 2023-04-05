@@ -82,12 +82,9 @@ void Application::update(sf::Time dt)
 void Application::render()
 {
     mWindow.clear();
-
     mStateStack.draw();
-
     mWindow.setView(mWindow.getDefaultView());
     mWindow.draw(mStatisticsText);
-
     mWindow.display();
 }
 
